@@ -54,6 +54,36 @@ document.addEventListener('DOMContentLoaded', function () {
   iniciarCarrossel('blusas-carousel');
 });
 
+// Carrossel paquistanesas
+
+ document.addEventListener('DOMContentLoaded', function () {
+    function iniciarCarrossel(id) {
+      const track = document.getElementById(id);
+      const slides = track.querySelectorAll('.carousel-slide');
+      let index = 0;
+
+      const atualizar = () => {
+        track.style.transform = `translateX(-${index * 100}%)`;
+      };
+
+      const next = () => {
+        index = (index + 1) % slides.length;
+        atualizar();
+      };
+
+      const prev = () => {
+        index = (index - 1 + slides.length) % slides.length;
+        atualizar();
+      };
+
+      document.querySelectorAll(`.next[data-target="${id}"]`).forEach(btn => btn.addEventListener('click', next));
+      document.querySelectorAll(`.prev[data-target="${id}"]`).forEach(btn => btn.addEventListener('click', prev));
+
+      setInterval(next, 5000); // autoplay a cada 5 segundos
+    }
+
+    iniciarCarrossel('paquistanesas-carousel');
+  });
 // feedbacks 
 document.addEventListener("DOMContentLoaded", function () {
   const carousel = document.getElementById("feedback-carousel");
